@@ -4,8 +4,8 @@
 I'm assuming everyone is using an IDE so just pick your poison, as long as it's IntelliJ IDEA :-) Otherwise, 
 
 ```
-git clone https://github.com/jewer/heirarchy.git h3
-cd h3
+git clone https://github.com/jewer/heirarchy.git heirarchy
+cd heirarchy
 javac src/com/ewerj/*.java
 java -classpath src com.ewerj.OrgParser orgs.txt users.txt 
 ```
