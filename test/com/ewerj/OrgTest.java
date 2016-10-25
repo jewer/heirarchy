@@ -1,7 +1,9 @@
 package com.ewerj;
 
 import org.junit.Test;
+import org.junit.runner.notification.RunListener;
 
+import static java.lang.Integer.parseInt;
 import static org.junit.Assert.*;
 
 public class OrgTest {
@@ -39,6 +41,19 @@ public class OrgTest {
 
         assertEquals(300, o.getTotalNumFiles());
         assertEquals(500, o.getTotalNumBytes());
+    }
+
+    @Test
+    public void parent_count_should_traverse_to_root(){
+        Org o = new Org(1, -1, "name");
+        Org o1 = new Org(2, 1, "next");
+        Org o2 = new Org(3, 2, "leaf");
+        o1.addChildOrg(o2);
+        o.addChildOrg(o1);
+
+        assertEquals("2", o2.getParentCount().toString());
+        assertEquals("1", o1.getParentCount().toString());
+        assertEquals("0", o.getParentCount().toString());
     }
 
 }

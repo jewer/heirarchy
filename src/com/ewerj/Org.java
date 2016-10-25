@@ -12,12 +12,13 @@ public class Org {
     private int orgId;
     private int parentOrgId;
     private String name;
-    private Org parent;
+    private Optional<Org> parent;
     private List<User> users;
     private List<Org> childOrgs;
 
     public Org(int orgId, int parentOrgId, String name) {
         this.orgId = orgId;
+        this.parent = Optional.empty();
         this.name = name;
         this.parentOrgId = parentOrgId;
         this.childOrgs = new ArrayList<>();
@@ -25,7 +26,7 @@ public class Org {
     }
 
     public void setParentOrg(Org o){
-        this.parent = o;
+        this.parent = Optional.of(o);
     }
 
     public void addUser(User u){
@@ -34,6 +35,7 @@ public class Org {
 
     public void addChildOrg(Org o){
         this.childOrgs.add(o);
+        o.parent = Optional.of(this);
     }
 
     public List<Org> getChildOrgs(){
@@ -73,11 +75,21 @@ public class Org {
         return name;
     }
 
+    public Integer getParentCount() {
+        Integer count = 0;
+        Org org = this;
+        while(org.parent.isPresent()){
+            count += 1;
+            org = org.parent.get();
+        }
+        return count;
+    }
+
     @Override
     public String toString(){
         List<String> orgStrings = new ArrayList<>();
         orgStrings.add(String.format("%s %s %s %s %s",
-                this.getParentOrgId().isPresent() ? "  " : "",
+                new String(new char[this.getParentCount() * 2]).replace("\0", " "), //indent based on parent level
                 this.orgId,
                 this.getTotalNumUsers(),
                 this.getTotalNumFiles(),

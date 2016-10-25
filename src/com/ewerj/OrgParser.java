@@ -53,7 +53,7 @@ public class OrgParser {
         for (Org org: unassociatedOrgMap.values()) {
             Optional < Integer > parentOrgId = org.getParentOrgId();
             if (parentOrgId.isPresent()) {
-                org.setParentOrg(unassociatedOrgMap.get(parentOrgId.get()));
+                //org.setParentOrg(unassociatedOrgMap.get(parentOrgId.get()));
                 unassociatedOrgMap.get(parentOrgId.get()).addChildOrg(org);
             } else {
                 topLevelOrgs.add(org);
