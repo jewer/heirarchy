@@ -63,13 +63,15 @@ public class OrgParser {
         //print out all orgs
         topLevelOrgs.stream().forEach(System.out::println);
 
+        /*
+        just for funsies
         if (orphanedUsers.size() > 0) {
             System.out.println("------");
             System.out.println("The following users were not associated with a valid Org.");
             System.out.println("------");
 
             orphanedUsers.stream().forEach(System.out::println);
-        }
+        }*/
     }
 
     public static Org parseOrg(String line) {
